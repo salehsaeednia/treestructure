@@ -10,7 +10,9 @@ import com.tradeshift.codechallenge.saleh.exception.RootAlreadyExistException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class NodeService {
@@ -71,12 +73,18 @@ public class NodeService {
 		if (parent == null) {
 			throw new InvalidNodeException();
 		}
+		Map<Integer, NodeDto> descendantsMap = new HashMap<>();
 		List<NodeEntity> descendants = nodeEntityService.getDescendant(parent);
 		List<NodeDto> result = new ArrayList<>();
-		result.add(NodeMapper.convert(parent));
+		NodeDto parentDto = NodeMapper.convert(parent);
+		result.add(parentDto);
+		descendantsMap.put(parentDto.getId(), parentDto);
 		for (NodeEntity entity : descendants) {
-			result.add(NodeMapper.convert(entity));
+			NodeDto nodeDto = NodeMapper.convert(entity);
+			result.add(nodeDto);
+			descendantsMap.put(nodeDto.getId(), nodeDto);
 		}
+		setNodeParents(result, descendantsMap);
 		return result;
 	}
 
@@ -110,11 +118,21 @@ public class NodeService {
 	public List<NodeDto> getAll() {
 		Iterable<NodeEntity> all = nodeEntityService.getAll();
 		List<NodeDto> result = new ArrayList<>();
+		Map<Integer, NodeDto> descendantsMap = new HashMap<>();
 		for (NodeEntity entity : all) {
-			result.add(NodeMapper.convert(entity));
+			NodeDto node = NodeMapper.convert(entity);
+			result.add(node);
+			descendantsMap.put(node.getId(), node);
 		}
+		setNodeParents(result, descendantsMap);
 		return result;
 	}
 
-
+	private void setNodeParents(List<NodeDto> nodes, Map<Integer, NodeDto> nodeDtoMap){
+		for (NodeDto n : nodes){
+			if (n.getParent() != null && n.getParent().getId() != null && nodeDtoMap.containsKey(n.getParent().getId())) {
+				n.setParent(nodeDtoMap.get(n.getParent().getId()));
+			}
+		}
+	}
 }
