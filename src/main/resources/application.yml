@@ -1,0 +1,33 @@
+server:
+  port: 8585
+  # The format used for the keystore. It could be set to JKS in case it is a JKS file
+#  ssl:
+#    key-store-type: PKCS12
+#    # The path to the keystore containing the certificate
+#    key-store:
+#    key-store-password:
+#    key-alias:
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /api-test-ui.html
+spring:
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  datasource:
+    platform: postgres
+    username: nodeuser
+    password: nodepass
+    url: jdbc:postgresql://localhost:5432/nodedb
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    database: postgresql

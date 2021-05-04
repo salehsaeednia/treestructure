@@ -1,0 +1,26 @@
+server:
+  port: 8585
+  # The format used for the keystore. It could be set to JKS in case it is a JKS file
+#  ssl:
+#    key-store-type: PKCS12
+#    # The path to the keystore containing the certificate
+#    key-store:
+#    key-store-password:
+#    key-alias:
+
+spring:
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+    database: postgresql
