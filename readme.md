@@ -320,7 +320,7 @@ upon successful execution, the application would be started and will listen on p
 </li>
 </ol> 
 <H2>How to Test</H2>
-This project has been integrated with Spring openApi and swagger. To send request, point your browser to <a href="http://127.0.0.1:8585/api-test-ui.html">http://127.0.0.1:8585/api-test-ui.html</a>.
+This project-f has been integrated with Spring openApi and swagger. To send request, point your browser to <a href="http://127.0.0.1:8585/api-test-ui.html">http://127.0.0.1:8585/api-test-ui.html</a>.
 This will bring swagger-ui documentation page and you could be easily able to send request to application to test the rest APIs.
 
  
