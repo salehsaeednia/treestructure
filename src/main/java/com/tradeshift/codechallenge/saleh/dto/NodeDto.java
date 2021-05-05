@@ -3,7 +3,7 @@ package com.tradeshift.codechallenge.saleh.dto;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
-public class NodeDto {
+public class NodeDto implements Comparable {
 
 	private Integer id;
 
@@ -69,5 +69,16 @@ public class NodeDto {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		if (this == o) return -1;
+		if (o == null || getClass() != o.getClass()) return -1;
+		NodeDto nodeDto = (NodeDto) o;
+		if (nodeDto.getHeight().equals(getHeight())){
+			return getId().compareTo(nodeDto.getId());
+		}
+		return getHeight().compareTo(nodeDto.getHeight());
 	}
 }

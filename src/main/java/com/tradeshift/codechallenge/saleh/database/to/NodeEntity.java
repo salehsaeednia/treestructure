@@ -1,5 +1,7 @@
 package com.tradeshift.codechallenge.saleh.database.to;
 
+import com.tradeshift.codechallenge.saleh.dto.NodeDto;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +13,7 @@ import java.util.Objects;
 @Entity
 @Table(name = "NODE")
 @SequenceGenerator(name = "NODE_SEQ_GEN", allocationSize = 1, sequenceName = "SEQ_NODE")
-public class NodeEntity {
+public class NodeEntity implements Comparable {
 
 
 	@Id
@@ -71,5 +73,21 @@ public class NodeEntity {
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
+	}
+
+	@Override
+	public int compareTo(Object o) {
+
+		if (this == o) return -1;
+		if (o == null || getClass() != o.getClass()) return -1;
+		NodeEntity other = (NodeEntity) o;
+		int otherHeight = other.getPath().split(",").length;
+		int thisHeight = getPath().split(",").length;
+		if (thisHeight == otherHeight) {
+			if (getId() != null && other.getId() != null) {
+				return getId().compareTo(other.getId());
+			}
+		}
+		return thisHeight - otherHeight;
 	}
 }

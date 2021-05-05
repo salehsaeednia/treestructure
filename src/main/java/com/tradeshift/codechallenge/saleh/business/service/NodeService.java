@@ -10,6 +10,7 @@ import com.tradeshift.codechallenge.saleh.exception.RootAlreadyExistException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,6 +76,7 @@ public class NodeService {
 		}
 		Map<Integer, NodeDto> descendantsMap = new HashMap<>();
 		List<NodeEntity> descendants = nodeEntityService.getDescendant(parent);
+		Collections.sort(descendants);
 		List<NodeDto> result = new ArrayList<>();
 		NodeDto parentDto = NodeMapper.convert(parent);
 		result.add(parentDto);
@@ -83,8 +85,10 @@ public class NodeService {
 			NodeDto nodeDto = NodeMapper.convert(entity);
 			result.add(nodeDto);
 			descendantsMap.put(nodeDto.getId(), nodeDto);
+			if (nodeDto.getParent() != null && nodeDto.getParent().getId() != null && descendantsMap.containsKey(nodeDto.getParent().getId())) {
+				nodeDto.setParent(descendantsMap.get(nodeDto.getParent().getId()));
+			}
 		}
-		setNodeParents(result, descendantsMap);
 		return result;
 	}
 
@@ -125,6 +129,7 @@ public class NodeService {
 			descendantsMap.put(node.getId(), node);
 		}
 		setNodeParents(result, descendantsMap);
+		Collections.sort(result);
 		return result;
 	}
 
