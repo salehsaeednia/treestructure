@@ -133,9 +133,10 @@ public class NodeService {
 		return result;
 	}
 
-	private void setNodeParents(List<NodeDto> nodes, Map<Integer, NodeDto> nodeDtoMap){
-		for (NodeDto n : nodes){
-			if (n.getParent() != null && n.getParent().getId() != null && nodeDtoMap.containsKey(n.getParent().getId())) {
+	private void setNodeParents(List<NodeDto> nodes, Map<Integer, NodeDto> nodeDtoMap) {
+		for (NodeDto n : nodes) {
+			if (n.getParent() != null && n.getParent().getId() != null
+					&& nodeDtoMap.containsKey(n.getParent().getId())) {
 				n.setParent(nodeDtoMap.get(n.getParent().getId()));
 			}
 		}

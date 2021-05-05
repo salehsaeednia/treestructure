@@ -76,7 +76,7 @@ public class NodeDto implements Comparable {
 		if (this == o) return -1;
 		if (o == null || getClass() != o.getClass()) return -1;
 		NodeDto nodeDto = (NodeDto) o;
-		if (nodeDto.getHeight().equals(getHeight())){
+		if (nodeDto.getHeight().equals(getHeight())) {
 			return getId().compareTo(nodeDto.getId());
 		}
 		return getHeight().compareTo(nodeDto.getHeight());
