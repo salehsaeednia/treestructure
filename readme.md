@@ -160,12 +160,12 @@ All APIs return a unique data structure.
 <BR/>
 <H3>Rest APIs</H3>
 <H5>save</H5>
-This end point would be used to store new nodes or change exsisting nodes in DB. We could also change the parent of each node with this end point.<BR/>
+This end point would be used to store new nodes or change existing nodes in DB. We could also change the parent of each node with this end point.<BR/>
 <strong>Hints</strong><BR/>
 <Ul>
 <li>Root Node should be persisted First. To Store root, parent of input object should be null.</li>
-<li>To store new nodes, ID of new node should be null and ID of the parent is mandatory.Other fields of parent are not required and will not be consideres.</li> 
-<li>Heigth of input data will not be consideres</li>
+<li>To store new nodes, ID of new node should be null and ID of the parent is mandatory.Other fields of parent are not required and will not be considered.</li> 
+<li>Height of input data will not be considered</li>
 <li>To change existing node(change name or parent), id of the node is mandatory.</li>
 </UL>
 
@@ -190,6 +190,35 @@ This end point would be used to store new nodes or change exsisting nodes in DB.
 </tbody>
 </table>
 <BR/>
+<H5>Change Parent</H5>
+This end point would be used to change existing node's parent in DB.<BR/>
+<strong>Hints</strong><BR/>
+<Ul>
+<li>Id of the node and Id of the parent node(new parent Id) are mandatory. other fields are not mandatory and will not considered .</li> 
+</UL>
+
+<table>
+<tbody>
+<tr>
+<th>HTTP Method</th>
+<td>POST</td>
+</tr>
+<tr>
+<th>End Point</th>
+<td>IP:8585/rest/v1/node/changeParent</td>
+</tr>
+<tr>
+<th>Body Parameter</th>
+<td>NodeDto</td>
+</tr>
+<tr>
+<th>Response Data Type</th>
+<td>NodeDto</td>
+</tr>
+</tbody>
+</table>
+<BR/>
+
 <H5>descendant</H5>
 This end point would be used to fetch all descendants of a given node, including the node itself.<BR/>
 
